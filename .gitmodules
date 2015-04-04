@@ -2,3 +2,6 @@
 	path = Glowkit
 	url = https://github.com/deathcap/Glowkit
 	branch = bukkit+glowkit
+[submodule "FML"]
+	path = FML
+	url = https://github.com/MinecraftForge/FML
