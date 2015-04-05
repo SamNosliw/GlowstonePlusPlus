@@ -255,13 +255,13 @@
                             <Specification-Title>Bukkit/Glowkit</Specification-Title>
                             <Specification-Version>${bukkit.version}</Specification-Version>
                             <Specification-Vendor>Glowstone Project</Specification-Vendor>
-                            <Sealed>true</Sealed>
+                            <Sealed>false</Sealed>
                         </manifestEntries>
                         <manifestSections>
                             <manifestSection>
                                 <name>net/glowstone/</name>
                                 <manifestEntries>
-                                    <Sealed>true</Sealed>
+                                    <Sealed>false</Sealed>
                                 </manifestEntries>
                             </manifestSection>
                         </manifestSections>
