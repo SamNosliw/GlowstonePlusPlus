@@ -103,6 +103,9 @@ public final class GlowServer implements Server {
             GlowPotionEffect.register();
             GlowEnchantment.register();
 
+            // load Forge Mod Loader TODO: move into loadPlugins? but needs args[] TODO 2: after start?
+            net.minecraftforge.fml.relauncher.ServerLaunchWrapper.main(args);
+
             // start server
             final GlowServer server = new GlowServer(config);
             server.start();
@@ -688,10 +691,6 @@ public final class GlowServer implements Server {
         commandMap.register("glowstone", new ColorCommand());
         commandMap.register("glowstone", new TellrawCommand());
 
-        // load Forge Mod Loader plugins
-        net.minecraft.client.Minecraft.fmlReentry();
-
-        // load Bukkit plugins
         File folder = new File(config.getString(ServerConfig.Key.PLUGIN_FOLDER));
         if (!folder.isDirectory() && !folder.mkdirs()) {
             logger.log(Level.SEVERE, "Could not create plugins directory: " + folder);
