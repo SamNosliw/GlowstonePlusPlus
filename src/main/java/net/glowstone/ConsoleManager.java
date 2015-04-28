@@ -208,7 +208,7 @@ public final class ConsoleManager {
     }
 
     private class ColoredCommandSender implements ConsoleCommandSender {
-        private final PermissibleBase perm = new PermissibleBase(this);
+        private final PermissibleBase perm = null; //TODO new PermissibleBase(this);
 
         ////////////////////////////////////////////////////////////////////////
         // CommandSender
