@@ -30,7 +30,7 @@ public class NbtStructureDataService implements StructureDataService {
     public NbtStructureDataService(GlowWorld world, File structureDir) {
         this.world = world;
         this.structureDir = structureDir;
-        server = (GlowServer) Bukkit.getServer();
+        server = GlowServer.getServer();
 
         if (!structureDir.isDirectory() && !structureDir.mkdirs()) {
             server.getLogger().warning("Failed to create directory: " + structureDir);

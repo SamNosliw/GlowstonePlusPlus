@@ -54,15 +54,15 @@ public class CavePopulator extends BlockPopulator {
                 @Override
                 public void run() {
                     Set<Location> snake = startSnake(world, random, x, y, z);
-                    // Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(GenPlugin.instance, new FinishSnake(world, snake));
+                    // GlowServer.getServer().getScheduler().scheduleSyncDelayedTask(GenPlugin.instance, new FinishSnake(world, snake));
 
                     if (random.nextInt(16) > 5) {
                         if (y > 36) {
                             snake = startSnake(world, random, x, y / 2, z);
-                            // Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(GenPlugin.instance, new FinishSnake(world, snake));
+                            // GlowServer.getServer().getScheduler().scheduleSyncDelayedTask(GenPlugin.instance, new FinishSnake(world, snake));
                         } else if (y < 24) {
                             snake = startSnake(world, random, x, y * 2, z);
-                            // Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(GenPlugin.instance, new FinishSnake(world, snake));
+                            // GlowServer.getServer().getScheduler().scheduleSyncDelayedTask(GenPlugin.instance, new FinishSnake(world, snake));
                         }
                     }
                 }

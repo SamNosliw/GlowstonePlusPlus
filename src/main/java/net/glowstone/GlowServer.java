@@ -423,8 +423,18 @@ public final class GlowServer {
         nameBans = new GlowBanList(this, BanList.Type.NAME);
         ipBans = new GlowBanList(this, BanList.Type.IP);
 
-        Bukkit.setServer(this);
+        GlowServer.setServer(this);
         loadConfig();
+    }
+
+    private static GlowServer theServer;
+
+    private static void setServer(GlowServer server) {
+        theServer = server;
+    }
+
+    public static GlowServer getServer() {
+        return theServer;
     }
 
     /**

@@ -90,7 +90,7 @@ public class NbtPlayerDataService implements PlayerDataService {
         }
 
         // In online mode, find the Mojang UUID if possible
-        if (Bukkit.getServer().getOnlineMode() || ((GlowServer) Bukkit.getServer()).getProxySupport()) {
+        if (GlowServer.getServer().getOnlineMode() || (GlowServer.getServer()).getProxySupport()) {
             UUID uuid = ProfileCache.getUUID(name);
             if (uuid != null) {
                 return uuid;

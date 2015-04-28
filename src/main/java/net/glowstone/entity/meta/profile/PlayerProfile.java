@@ -62,7 +62,7 @@ public final class PlayerProfile {
             return null;
         }
 
-        Player player = ((GlowServer) Bukkit.getServer()).getPlayer(name);
+        Player player = (GlowServer.getServer()).getPlayer(name);
         if (player != null) {
             return ((GlowPlayer) player).getProfile();
         }

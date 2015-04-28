@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 public class ServerShim implements Server {
 
     public static void install() {
-        if (Bukkit.getServer() == null) {
+        if (GlowServer.getServer() == null) {
             Bukkit.setServer(new ServerShim());
         }
     }

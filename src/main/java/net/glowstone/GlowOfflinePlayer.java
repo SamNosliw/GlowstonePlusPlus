@@ -184,10 +184,10 @@ public final class GlowOfflinePlayer implements OfflinePlayer {
     public static OfflinePlayer deserialize(Map<String, Object> val) {
         if (val.get("name") != null) {
             // use name
-            return Bukkit.getServer().getOfflinePlayer(val.get("name").toString());
+            return GlowServer.getServer().getOfflinePlayer(val.get("name").toString());
         } else {
             // use UUID
-            return Bukkit.getServer().getOfflinePlayer(UUID.fromString(val.get("UUID").toString()));
+            return GlowServer.getServer().getOfflinePlayer(UUID.fromString(val.get("UUID").toString()));
         }
     }
 }

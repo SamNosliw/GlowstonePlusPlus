@@ -271,7 +271,7 @@ public final class GlowBlock implements Block {
     }
 
     public MaterialValueManager.ValueCollection getMaterialValues() {
-        return ((GlowServer) Bukkit.getServer()).getMaterialValueManager().getValues(getType());
+        return (GlowServer.getServer()).getMaterialValueManager().getValues(getType());
     }
 
     ////////////////////////////////////////////////////////////////////////////

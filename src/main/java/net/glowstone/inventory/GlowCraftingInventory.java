@@ -76,7 +76,7 @@ public class GlowCraftingInventory extends GlowInventory implements CraftingInve
             }
 
             // Then try to craft as many as possible
-            CraftingManager cm = ((GlowServer) Bukkit.getServer()).getCraftingManager();
+            CraftingManager cm = (GlowServer.getServer()).getCraftingManager();
             while (freeSpace >= clickedItem.getAmount() && getRecipe() == recipe) {
                 clickedItem = recipe.getResult().clone();
                 freeSpace -= clickedItem.getAmount();
@@ -104,7 +104,7 @@ public class GlowCraftingInventory extends GlowInventory implements CraftingInve
      */
     public void craft() {
         ItemStack[] matrix = getMatrix();
-        CraftingManager cm = ((GlowServer) Bukkit.getServer()).getCraftingManager();
+        CraftingManager cm = (GlowServer.getServer()).getCraftingManager();
         Recipe recipe = cm.getCraftingRecipe(matrix);
 
         if (recipe != null) {
@@ -158,7 +158,7 @@ public class GlowCraftingInventory extends GlowInventory implements CraftingInve
 
     @Override
     public Recipe getRecipe() {
-        return ((GlowServer) Bukkit.getServer()).getCraftingManager().getCraftingRecipe(getMatrix());
+        return (GlowServer.getServer()).getCraftingManager().getCraftingRecipe(getMatrix());
     }
 
 }
