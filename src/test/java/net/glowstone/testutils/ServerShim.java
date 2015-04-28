@@ -1,6 +1,7 @@
 package net.glowstone.testutils;
 
 import com.avaje.ebean.config.ServerConfig;
+import net.glowstone.GlowServer;
 import net.glowstone.inventory.GlowItemFactory;
 import org.bukkit.*;
 import org.bukkit.command.CommandException;
