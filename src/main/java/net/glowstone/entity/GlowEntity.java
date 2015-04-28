@@ -179,7 +179,11 @@ public abstract class GlowEntity implements Entity {
     }
 
     @Override
-    public final GlowServer getServer() {
+    public final org.bukkit.Server getServer() {
+        return null; // TODO: getGlowServer
+    }
+
+    public final GlowServer getGlowServer() {
         return server;
     }
 
