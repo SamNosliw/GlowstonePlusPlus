@@ -256,11 +256,6 @@ public final class GlowServer {
     private final SimpleCommandMap commandMap = new SimpleCommandMap(this);
 
     /**
-     * The plugin manager of this server.
-     */
-    private final SimplePluginManager pluginManager = new SimplePluginManager(this, commandMap);
-
-    /**
      * The plugin type detector of thi server.
      */
     private GlowPluginTypeDetector pluginTypeDetector;
@@ -464,7 +459,6 @@ public final class GlowServer {
         // Start loading plugins
         new LibraryManager(this).run();
         loadPlugins();
-        enablePlugins(PluginLoadOrder.STARTUP);
 
         // Create worlds
         String name = config.getString(ServerConfig.Key.LEVEL_NAME);
@@ -498,7 +492,6 @@ public final class GlowServer {
         }
 
         // Finish loading plugins
-        enablePlugins(PluginLoadOrder.POSTWORLD);
         commandMap.registerServerAliases();
         scheduler.start();
     }
@@ -629,9 +622,6 @@ public final class GlowServer {
         isShuttingDown = true;
         logger.info("The server is shutting down...");
 
-        // Disable plugins
-        pluginManager.clearPlugins();
-
         // Kick all players (this saves their data too)
         for (Player player : getOnlinePlayers()) {
             player.kickPlayer(getShutdownMessage());
@@ -711,28 +701,16 @@ public final class GlowServer {
         pluginTypeDetector = new GlowPluginTypeDetector(folder, logger);
         pluginTypeDetector.scan();
 
-        // clear plugins and prepare to load (Bukkit)
-        pluginManager.clearPlugins();
-        pluginManager.registerInterface(JavaPluginLoader.class);
-        Plugin[] plugins = pluginManager.loadPlugins(pluginTypeDetector.bukkitPlugins.toArray(new File[0]), folder.getPath());
-
-        // call onLoad methods
-        for (Plugin plugin : plugins) {
-            try {
-                plugin.onLoad();
-            } catch (Exception ex) {
-                logger.log(Level.SEVERE, "Error loading " + plugin.getDescription().getFullName(), ex);
-            }
-        }
-
         if (pluginTypeDetector.spongePlugins.size() != 0) {
             boolean hasSponge = false;
+            /*
             for (Plugin plugin : plugins) {
                 if (plugin.getName().equals("Bukkit2Sponge")) {
                     hasSponge = true; // TODO: better detection method, plugin description file annotation APIs?
                     break;
                 }
             }
+            */
 
             if (!hasSponge) {
                 logger.log(Level.WARNING, "SpongeAPI plugins found, but no Sponge bridge present! They will be ignored.");
@@ -769,56 +747,6 @@ public final class GlowServer {
         return pluginTypeDetector.spongePlugins;
     }
 
-    /**
-     * Enable all plugins of the given load order type.
-     * @param type The type of plugin to enable.
-     */
-    private void enablePlugins(PluginLoadOrder type) {
-        if (type == PluginLoadOrder.STARTUP) {
-            helpMap.clear();
-            helpMap.loadConfig(config.getConfigFile(ServerConfig.Key.HELP_FILE));
-        }
-
-        // load all the plugins
-        Plugin[] plugins = pluginManager.getPlugins();
-        for (Plugin plugin : plugins) {
-            if (!plugin.isEnabled() && plugin.getDescription().getLoad() == type) {
-                List<Permission> perms = plugin.getDescription().getPermissions();
-                for (Permission perm : perms) {
-                    try {
-                        pluginManager.addPermission(perm);
-                    } catch (IllegalArgumentException ex) {
-                        getLogger().log(Level.WARNING, "Plugin " + plugin.getDescription().getFullName() + " tried to register permission '" + perm.getName() + "' but it's already registered", ex);
-                    }
-                }
-
-                try {
-                    pluginManager.enablePlugin(plugin);
-                } catch (Throwable ex) {
-                    logger.log(Level.SEVERE, "Error loading " + plugin.getDescription().getFullName(), ex);
-                }
-            }
-        }
-
-        if (type == PluginLoadOrder.POSTWORLD) {
-            commandMap.setFallbackCommands();
-            commandMap.registerServerAliases();
-            DefaultPermissions.registerCorePermissions();
-            helpMap.initializeCommands();
-            helpMap.amendTopics(config.getConfigFile(ServerConfig.Key.HELP_FILE));
-
-            // load permissions.yml
-            ConfigurationSection permConfig = config.getConfigFile(ServerConfig.Key.PERMISSIONS_FILE);
-            List<Permission> perms = Permission.loadPermissions(permConfig.getValues(false), "Permission node '%s' in permissions config is invalid", PermissionDefault.OP);
-            for (Permission perm : perms) {
-                try {
-                    pluginManager.addPermission(perm);
-                } catch (IllegalArgumentException ex) {
-                    getLogger().log(Level.WARNING, "Permission config tried to register '" + perm.getName() + "' but it's already registered", ex);
-                }
-            }
-        }
-    }
 
     /**
      * Reloads the server, refreshing settings and plugin information
@@ -837,8 +765,6 @@ public final class GlowServer {
 
             // Load plugins
             loadPlugins();
-            enablePlugins(PluginLoadOrder.STARTUP);
-            enablePlugins(PluginLoadOrder.POSTWORLD);
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "Uncaught error while reloading", ex);
         }
@@ -1032,10 +958,6 @@ public final class GlowServer {
 
     ////////////////////////////////////////////////////////////////////////////
     // Access to Bukkit API
-
-    public PluginManager getPluginManager() {
-        return pluginManager;
-    }
 
     public GlowScheduler getScheduler() {
         return scheduler;
@@ -1242,12 +1164,14 @@ public final class GlowServer {
 
     public int broadcast(String message, String permission) {
         int count = 0;
+        /* TODO: permission subscriptions?
         for (Permissible permissible : getPluginManager().getPermissionSubscriptions(permission)) {
             if (permissible instanceof CommandSender && permissible.hasPermission(permission)) {
                 ((CommandSender) permissible).sendMessage(message);
                 ++count;
             }
         }
+        */
         return count;
     }
 

@@ -113,10 +113,6 @@ public class QueryHandler extends SimpleChannelInboundHandler<DatagramPacket> {
         StringBuilder plugins = new StringBuilder("Glowstone ").append(server.getVersion()).append(" on Bukkit ").append(server.getBukkitVersion());
         if (showPlugins) {
             char delim = ':';
-            for (Plugin plugin : server.getPluginManager().getPlugins()) {
-                plugins.append(delim).append(' ').append(plugin.getDescription().getFullName());
-                delim = ';';
-            }
         }
 
         Map<String, Object> data = new LinkedHashMap<>();
