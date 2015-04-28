@@ -661,7 +661,7 @@ public final class GlowServer {
         spawnRadius = config.getInt(ServerConfig.Key.SPAWN_RADIUS);
         whitelistEnabled = config.getBoolean(ServerConfig.Key.WHITELIST);
         idleTimeout = config.getInt(ServerConfig.Key.PLAYER_IDLE_TIMEOUT);
-        craftingManager.initialize();
+        //craftingManager.initialize(); // TODO
 
         // special handling
         warnState = Warning.WarningState.value(config.getString(ServerConfig.Key.WARNING_STATE));
