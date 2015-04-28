@@ -180,7 +180,7 @@ public abstract class GlowEntity implements Entity {
 
     @Override
     public final org.bukkit.Server getServer() {
-        return null; // TODO: getGlowServer
+        throw new RuntimeException("Change Entity getServer to getGlowServer()");
     }
 
     public final GlowServer getGlowServer() {

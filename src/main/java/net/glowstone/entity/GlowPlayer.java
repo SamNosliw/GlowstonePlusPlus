@@ -327,7 +327,7 @@ public final class GlowPlayer extends GlowHumanEntity implements Player {
         reader.close();
 
         // Add player to list of online players
-        getServer().setPlayerOnline(this, true);
+        getGlowServer().setPlayerOnline(this, true);
 
         // save data back out
         saveData();
@@ -404,7 +404,7 @@ public final class GlowPlayer extends GlowHumanEntity implements Player {
         getInventory().removeViewer(this);
         getInventory().getCraftingInventory().removeViewer(this);
         permissions.clearPermissions();
-        getServer().setPlayerOnline(this, false);
+        getGlowServer().setPlayerOnline(this, false);
         super.remove();
     }
 
@@ -860,15 +860,15 @@ public final class GlowPlayer extends GlowHumanEntity implements Player {
 
     @Override
     public boolean isOp() {
-        return getServer().getOpsList().containsUUID(getUniqueId());
+        return getGlowServer().getOpsList().containsUUID(getUniqueId());
     }
 
     @Override
     public void setOp(boolean value) {
         if (value) {
-            getServer().getOpsList().add(this);
+            getGlowServer().getOpsList().add(this);
         } else {
-            getServer().getOpsList().remove(getUniqueId());
+            getGlowServer().getOpsList().remove(getUniqueId());
         }
         permissions.recalculatePermissions();
     }

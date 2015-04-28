@@ -146,7 +146,7 @@ public final class EntityStorage {
         EntityStore<?> store = find(entity.getClass(), "load");
 
         // work out the entity's location, using its current location if unavailable
-        World world = NbtSerialization.readWorld(entity.getServer(), compound);
+        World world = NbtSerialization.readWorld(entity.getGlowServer(), compound);
         if (world == null) {
             world = entity.getWorld();
         }

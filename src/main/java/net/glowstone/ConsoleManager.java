@@ -3,6 +3,7 @@ package net.glowstone;
 import jline.console.ConsoleReader;
 import jline.console.completer.Completer;
 import org.bukkit.ChatColor;
+import org.bukkit.Server;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
@@ -230,7 +231,11 @@ public final class ConsoleManager {
         }
 
         @Override
-        public GlowServer getServer() {
+        public org.bukkit.Server getServer() {
+            throw new RuntimeException("Change ColoredCommandSender getServer to getGlowServer()");
+        }
+
+        public GlowServer getGlowServer() {
             return server;
         }
 

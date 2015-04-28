@@ -88,7 +88,7 @@ public final class EventFactory {
     }
 
     public static PlayerLoginEvent onPlayerLogin(GlowPlayer player, String hostname) {
-        final GlowServer server = player.getServer();
+        final GlowServer server = player.getGlowServer();
         final InetAddress address = player.getAddress().getAddress();
         final String addressString = address.getHostAddress();
         final PlayerLoginEvent event = new PlayerLoginEvent(player, hostname, address);

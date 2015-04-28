@@ -29,6 +29,10 @@ public class RconCommandSender implements RemoteConsoleCommandSender {
 
     @Override
     public Server getServer() {
+        throw new RuntimeException("Change RconCommnadServer getServer to getGlowServer()");
+    }
+
+    public GlowServer getGlowServer() {
         return server;
     }
 
