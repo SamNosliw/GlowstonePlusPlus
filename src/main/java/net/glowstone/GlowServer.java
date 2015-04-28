@@ -1227,7 +1227,7 @@ public final class GlowServer {
     }
 
     public int broadcastMessage(String message) {
-        return broadcast(message, BROADCAST_CHANNEL_USERS);
+        return broadcast(message, Server.BROADCAST_CHANNEL_USERS);
     }
 
     public int broadcast(String message, String permission) {
