@@ -253,7 +253,7 @@ public final class GlowServer {
     /**
      * The command map of this server.
      */
-    private final SimpleCommandMap commandMap = new SimpleCommandMap(this);
+    private final SimpleCommandMap commandMap = null; //TODO new SimpleCommandMap(this);
 
     /**
      * The plugin type detector of thi server.
