@@ -38,13 +38,13 @@ public final class EventFactory {
         final GlowServer server = GlowServer.getServer();
 
         if (event.isAsynchronous()) {
-            server.getPluginManager().callEvent(event);
+            // TODO: send event
             return event;
         } else {
             FutureTask<T> task = new FutureTask<>(new Runnable() {
                 @Override
                 public void run() {
-                    server.getPluginManager().callEvent(event);
+                    // TODO: send event
                 }
             }, event);
             server.getScheduler().scheduleInTickExecution(task);
