@@ -30,7 +30,7 @@
 
         <!-- Imports -->
         <module name="RedundantImport"/>
-        <module name="UnusedImports"/>
+        <!-- <module name="UnusedImports"/> -->
         <module name="IllegalImport">
             <property name="illegalPkgs" value="net.minecraft.server, org.bukkit.craftbukkit"/>
         </module>
