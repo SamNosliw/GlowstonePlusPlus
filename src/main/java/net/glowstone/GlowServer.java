@@ -492,7 +492,7 @@ public final class GlowServer {
         }
 
         // Finish loading plugins
-        commandMap.registerServerAliases();
+        //commandMap.registerServerAliases();
         scheduler.start();
     }
 
@@ -688,9 +688,9 @@ public final class GlowServer {
      */
     private void loadPlugins() {
         // clear the map
-        commandMap.clearCommands();
-        commandMap.register("glowstone", new ColorCommand());
-        commandMap.register("glowstone", new TellrawCommand());
+        //commandMap.clearCommands();
+        //commandMap.register("glowstone", new ColorCommand());
+        //commandMap.register("glowstone", new TellrawCommand());
 
         File folder = new File(config.getString(ServerConfig.Key.PLUGIN_FOLDER));
         if (!folder.isDirectory() && !folder.mkdirs()) {
